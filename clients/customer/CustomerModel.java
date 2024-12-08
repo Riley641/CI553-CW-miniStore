@@ -1,6 +1,7 @@
 package clients.customer;
 
 import catalogue.Basket;
+import catalogue.BetterBasket;
 import catalogue.Product;
 import debug.DEBUG;
 import middle.MiddleFactory;
@@ -9,6 +10,9 @@ import middle.StockException;
 import middle.StockReader;
 
 import javax.swing.*;
+
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Observable;
 
 /**
@@ -128,7 +132,7 @@ public class CustomerModel extends Observable
    */
   protected Basket makeBasket()
   {
-    return new Basket();
+    return new BetterBasket();
   }
 }
 

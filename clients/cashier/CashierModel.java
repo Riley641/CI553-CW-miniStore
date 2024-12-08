@@ -1,10 +1,12 @@
 package clients.cashier;
 
 import catalogue.Basket;
+import catalogue.BetterBasket;
 import catalogue.Product;
 import debug.DEBUG;
 import middle.*;
 
+import java.util.Collections;
 import java.util.Observable;
 
 /**
@@ -113,6 +115,7 @@ public class CashierModel extends Observable
         {                                       // T
           makeBasketIfReq();                    //  new Basket ?
           theBasket.add( theProduct );          //  Add to bought
+          Collections.sort(theBasket);
           theAction = "Purchased " +            //    details
                   theProduct.getDescription();  //
         } else {                                // F
@@ -192,7 +195,7 @@ public class CashierModel extends Observable
    */
   protected Basket makeBasket()
   {
-    return new Basket();
+    return new BetterBasket();
   }
 }
   
