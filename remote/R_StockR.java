@@ -65,4 +65,10 @@ public class      R_StockR
     return aStockR.getImage( pNum );
   }
 
+@Override
+public String searchProducts(String searchTerm) throws StockException {
+	// TODO Auto-generated method stub
+	return aStockR.searchProducts(searchTerm);
+}
+
 }

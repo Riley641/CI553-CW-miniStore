@@ -115,4 +115,11 @@ public class      R_StockRW
   {
     aStockRW.modifyStock( product );
   }
+
+@Override
+public String searchProducts(String searchTerm) throws StockException {
+	
+	// TODO Auto-generated method stub
+	return aStockRW.searchProducts(searchTerm);
+}
 }

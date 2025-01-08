@@ -134,5 +134,17 @@ public class CustomerModel extends Observable
   {
     return new BetterBasket();
   }
+
+public void doSearch(String searchTerm) {
+
+		try {
+			pn  = theStock.searchProducts(searchTerm);
+		} catch (StockException e) {
+			e.printStackTrace();
+		}
+    
+    doCheck(pn);
 }
 
+
+}

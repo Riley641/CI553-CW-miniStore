@@ -105,4 +105,11 @@ public class F_StockR implements StockReader
     }
   }
 
+@Override
+public synchronized String searchProducts(String searchTerm) throws StockException {
+    DEBUG.trace("F_StockR:searchProducts()" );
+    if ( aR_StockR == null ) connect();
+      return aR_StockR.searchProducts( searchTerm );
+}
+
 }

@@ -1,5 +1,7 @@
 package clients.customer;
 
+import middle.StockException;
+
 /**
  * The Customer Controller
  */
@@ -36,6 +38,10 @@ public class CustomerController
   {
     model.doClear();
   }
+
+public void doSearch(String searchTerm) {
+	model.doSearch(searchTerm);
+}
 
   
 }

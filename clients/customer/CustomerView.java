@@ -21,18 +21,20 @@ public class CustomerView implements Observer
   {
     public static final String CHECK  = "Check";
     public static final String CLEAR  = "Clear";
+    public static final String SEARCH = "Search";
   }
 
   private static final int H = 300;       // Height of window pixels
   private static final int W = 400;       // Width  of window pixels
 
-  private final JLabel      pageTitle  = new JLabel();
-  private final JLabel      theAction  = new JLabel();
-  private final JTextField  theInput   = new JTextField();
-  private final JTextArea   theOutput  = new JTextArea();
-  private final JScrollPane theSP      = new JScrollPane();
-  private final JButton     theBtCheck = new JButton( Name.CHECK );
-  private final JButton     theBtClear = new JButton( Name.CLEAR );
+  private final JLabel      pageTitle   = new JLabel();
+  private final JLabel      theAction   = new JLabel();
+  private final JTextField  theInput    = new JTextField();
+  private final JTextArea   theOutput   = new JTextArea();
+  private final JScrollPane theSP       = new JScrollPane();
+  private final JButton     theBtCheck  = new JButton( Name.CHECK );
+  private final JButton     theBtSearch = new JButton( Name.SEARCH);
+  private final JButton     theBtClear  = new JButton( Name.CLEAR );
 
   private Picture thePicture = new Picture(80,80);
   private StockReader theStock   = null;
@@ -71,8 +73,13 @@ public class CustomerView implements Observer
     theBtCheck.addActionListener(                   // Call back code
       e -> cont.doCheck( theInput.getText() ) );
     cp.add( theBtCheck );                           //  Add to canvas
-
-    theBtClear.setBounds( 16, 25+60*1, 80, 40 );    // Clear button
+    
+    theBtSearch.setBounds(16, 25+60*1, 80, 40);
+    theBtSearch.addActionListener( 
+    		e -> cont.doSearch(theInput.getText()));
+    cp.add(theBtSearch);
+    
+    theBtClear.setBounds( 16, 25+60*2, 80, 40 );    // Clear button
     theBtClear.addActionListener(                   // Call back code
       e -> cont.doClear() );
     cp.add( theBtClear );                           //  Add to canvas
@@ -91,7 +98,7 @@ public class CustomerView implements Observer
     cp.add( theSP );                                //  Add to canvas
     theSP.getViewport().add( theOutput );           //  In TextArea
 
-    thePicture.setBounds( 16, 25+60*2, 80, 80 );   // Picture area
+    thePicture.setBounds( 16, 25+60*3, 80, 80 );   // Picture area
     cp.add( thePicture );                           //  Add to canvas
     thePicture.clear();
     
