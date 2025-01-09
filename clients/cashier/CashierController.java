@@ -30,6 +30,9 @@ public class CashierController
     model.doCheck(pn, quantity);
   }
 
+  public void doDiscount() {
+    model.doDiscount();
+  }
    /**
    * Buy interaction from view
    */

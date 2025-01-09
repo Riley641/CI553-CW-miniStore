@@ -22,6 +22,10 @@ public class ConfigController {
     this.model = model;
   }
 
+  public void setDiscount( double discount) {
+
+    model.setDiscount(discount);
+  }
 
   public boolean isDarkMode() {
     return model.isDarkMode();

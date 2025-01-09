@@ -3,11 +3,13 @@ package clients.cashier;
 import catalogue.Basket;
 import catalogue.BetterBasket;
 import catalogue.Product;
+import clients.config.ConfigModel;
 import debug.DEBUG;
 import middle.*;
 
 import java.util.Collections;
 import java.util.Observable;
+
 
 /**
  * Implements the Model of the cashier client
@@ -21,7 +23,6 @@ public class CashierModel extends Observable
   private Basket      theBasket  = null;            // Bought items
 
   private String      pn = "";                      // Product being processed
-
   private StockReadWriter theStock     = null;
   private OrderProcessing theOrder     = null;
 
@@ -52,6 +53,17 @@ public class CashierModel extends Observable
     return theBasket;
   }
 
+  public void doDiscount() {
+    if (getBasket() == null) {
+      return;
+    }
+
+    double discountPrice = -(getBasket().stream().reduce(0.0f, (acc, product) -> (float) (acc + product.getPrice()), Float::sum)) * ConfigModel.getDiscount();
+    getBasket().add(
+            new Product("9999", "Discount", discountPrice, 1)
+    );
+    setChanged(); notifyObservers();
+  }
   /**
    * Check if the product is in Stock
    * @param productNum The product number

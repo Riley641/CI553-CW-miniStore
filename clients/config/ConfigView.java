@@ -24,6 +24,7 @@ public class ConfigView implements Observer
   private final JLabel      pageTitle  = new JLabel();
   private final JCheckBox   theDarkMode = new JCheckBox("Dark Mode");
   private final JButton     theSaveButton = new JButton("Save");
+  private final JSpinner    theSpinner = new JSpinner(new SpinnerNumberModel(0.1f, 0.0f, 1.0f, 0.1f));
   private ConfigController cont       = null;
   
   /**
@@ -55,13 +56,20 @@ public class ConfigView implements Observer
 
     });
 
-    theSaveButton.setBounds( 110, 40, 100, 20 );
-    theSaveButton.addActionListener(e -> {cont.saveSettings();});
 
+    theSpinner.setBounds( 110, 40, 100, 20 );
+    theSpinner.setValue(0.1f);
+    theSpinner.addChangeListener(e -> {
+      cont.setDiscount((double)theSpinner.getValue());
+    });
+
+    theSaveButton.setBounds( 110, 60, 100, 20 );
+    theSaveButton.addActionListener(e -> {cont.saveSettings();});
 
     cp.add( pageTitle );
     cp.add( theDarkMode );
     cp.add( theSaveButton );
+    cp.add( theSpinner );
 
     rootWindow.setVisible( true );                  // Make visible
 
@@ -88,7 +96,7 @@ public class ConfigView implements Observer
     ConfigModel model  = (ConfigModel) modelC;
     String      message = (String) arg;
     theDarkMode.setSelected(cont.isDarkMode());
-
+    theSpinner.setValue(ConfigModel.getDiscount());
     if (cont.isDarkMode()) {
       FlatDarculaLaf.setup();
     } else {

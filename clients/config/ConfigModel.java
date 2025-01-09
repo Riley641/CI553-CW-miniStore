@@ -14,9 +14,19 @@ import org.json.*;
 public class ConfigModel extends Observable  {
 
   private boolean isDarkMode;
+  private static double discount = 0.1f;
   public ConfigModel() {
     loadSettings();
   }
+    public static double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount( double discount) {
+
+        this.discount = discount;
+    }
+
     public boolean isDarkMode() {
         return isDarkMode;
     }
@@ -37,6 +47,7 @@ public class ConfigModel extends Observable  {
         // Save settings to file
         JSONObject obj = new JSONObject();
         obj.put("isDarkMode", isDarkMode);
+        obj.put("discount", discount);
         try {
             FileWriter file = new FileWriter("settings.json");
             file.write(obj.toString());
@@ -52,9 +63,11 @@ public class ConfigModel extends Observable  {
             JSONObject obj = new JSONObject(Files.readString(Path.of("settings.json")));
             DEBUG.trace(obj.toString());
             isDarkMode = obj.getBoolean("isDarkMode");
+            discount = (float) obj.getDouble("discount");
         } catch (Exception e) {
             // Default settings
             isDarkMode = false;
+            discount = 0.1f;
             return;
         }
     }
