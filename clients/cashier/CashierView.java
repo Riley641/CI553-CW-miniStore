@@ -11,6 +11,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 
+
+
 /**
  * View of the model 
  */
@@ -124,7 +126,7 @@ public class CashierView implements Observer
       theOutput.setText( "Customers order" );
     else
       theOutput.setText( basket.getDetails() );
-    
+
     theInput.requestFocus();               // Focus is here
   }
 

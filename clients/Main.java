@@ -6,16 +6,23 @@ import clients.backDoor.BackDoorView;
 import clients.cashier.CashierController;
 import clients.cashier.CashierModel;
 import clients.cashier.CashierView;
+import clients.config.ConfigController;
+import clients.config.ConfigModel;
+import clients.config.ConfigView;
 import clients.customer.CustomerController;
 import clients.customer.CustomerModel;
 import clients.customer.CustomerView;
 import clients.packing.PackingController;
 import clients.packing.PackingModel;
 import clients.packing.PackingView;
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import debug.DEBUG;
 import middle.LocalMiddleFactory;
 import middle.MiddleFactory;
 import javax.swing.*;
+import javax.swing.plaf.metal.MetalLookAndFeel;
+import javax.swing.plaf.synth.SynthLookAndFeel;
 import java.awt.*;
 
 /**
@@ -40,12 +47,30 @@ class Main
   public void begin()
   {
     DEBUG.set(true); /* Lots of debug info */
+    FlatLightLaf.setup();
     MiddleFactory mlf = new LocalMiddleFactory();  // Direct access
     startCustomerGUI_MVC( mlf );
     startCashierGUI_MVC( mlf );
     startCashierGUI_MVC( mlf ); // you can create multiple clients
     startPackingGUI_MVC( mlf );
     startBackDoorGUI_MVC( mlf );
+    startConfigGUI_MVC();
+  }
+
+
+  public void startConfigGUI_MVC() {
+    JFrame  window = new JFrame();
+    window.setTitle( "Config Client MVC");
+    window.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+    Dimension pos = PosOnScrn.getPos();
+
+    ConfigModel model = new ConfigModel();
+    ConfigView view  = new ConfigView( window, pos.width, pos.height );
+    ConfigController cont  = new ConfigController( model, view );
+    view.setController( cont );
+
+    model.addObserver( view );       // Add observer to the model
+    window.setVisible(true);         // Display Screen
   }
   
   /**
