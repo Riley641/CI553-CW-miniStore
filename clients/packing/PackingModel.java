@@ -2,6 +2,7 @@ package clients.packing;
 
 
 import catalogue.Basket;
+import clients.ReciptMaker;
 import debug.DEBUG;
 import middle.MiddleFactory;
 import middle.OrderException;
@@ -130,12 +131,13 @@ public class PackingModel extends Observable
       Basket basket =  theBasket.get();       // Basket being packed
       if ( basket != null )                   // T
       {
+        ReciptMaker.makeRecipt(theBasket.get());
         theBasket.set( null );                //  packed
         int no = basket.getOrderNum();        //  Order no
         theOrder.informOrderPacked( no );     //  Tell system
         theAction = "";                       //  Inform picker
         worker.free();                        //  Can pack some more
-      } else {                                // F 
+      } else {                                // F
         theAction = "No order";       //   Not packed order
       }
       setChanged(); notifyObservers(theAction);

@@ -1,6 +1,8 @@
 package clients.config;
 
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 /**
  * The Cashier Controller
  */
