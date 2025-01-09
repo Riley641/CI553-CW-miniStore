@@ -38,4 +38,8 @@ public class ConfigController {
   public void setLightMode() {
     model.setLightMode();
   }
+
+  public void saveSettings() {
+    model.saveSettings();
+  }
 }

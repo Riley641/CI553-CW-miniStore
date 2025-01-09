@@ -1,8 +1,5 @@
 package clients.config;
 
-import middle.MiddleFactory;
-import middle.Names;
-import middle.RemoteMiddleFactory;
 
 import javax.swing.*;
 
@@ -32,6 +29,7 @@ public class ConfigClient
     view.setController( cont );
 
     model.addObserver( view );       // Add observer to the model
+    model.forceUpdate();
     window.setVisible(true);         // Display Screen
   }
 }

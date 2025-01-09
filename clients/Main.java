@@ -70,6 +70,7 @@ class Main
     view.setController( cont );
 
     model.addObserver( view );       // Add observer to the model
+    model.forceUpdate();
     window.setVisible(true);         // Display Screen
   }
   
@@ -110,6 +111,7 @@ class Main
     view.setController( cont );
 
     model.addObserver( view );       // Add observer to the model
+
     window.setVisible(true);         // Make window visible
     model.askForUpdate();            // Initial display
   }

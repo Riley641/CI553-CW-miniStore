@@ -23,6 +23,7 @@ public class ConfigView implements Observer
 
   private final JLabel      pageTitle  = new JLabel();
   private final JCheckBox   theDarkMode = new JCheckBox("Dark Mode");
+  private final JButton     theSaveButton = new JButton("Save");
   private ConfigController cont       = null;
   
   /**
@@ -46,7 +47,6 @@ public class ConfigView implements Observer
     pageTitle.setText( "Configs" );
     theDarkMode.setBounds( 110, 20, 100, 20 );
     theDarkMode.addItemListener( e -> {
-      DEBUG.trace("PLEAES WORK");
       if (theDarkMode.isSelected()) {
         cont.setDarkMode();
       } else {
@@ -54,10 +54,15 @@ public class ConfigView implements Observer
       }
 
     });
+
+    theSaveButton.setBounds( 110, 40, 100, 20 );
+    theSaveButton.addActionListener(e -> {cont.saveSettings();});
+
+
     cp.add( pageTitle );
     cp.add( theDarkMode );
+    cp.add( theSaveButton );
 
-    
     rootWindow.setVisible( true );                  // Make visible
 
   }
@@ -82,16 +87,16 @@ public class ConfigView implements Observer
   {
     ConfigModel model  = (ConfigModel) modelC;
     String      message = (String) arg;
+    theDarkMode.setSelected(cont.isDarkMode());
+
     if (cont.isDarkMode()) {
       FlatDarculaLaf.setup();
-      for (Frame j : Frame.getFrames()) {
-        SwingUtilities.updateComponentTreeUI(j);
-      }
     } else {
       FlatLightLaf.setup();
-      for (Frame j : Frame.getFrames()) {
-        SwingUtilities.updateComponentTreeUI(j);
-      }
+    }
+
+    for (Frame j : Frame.getFrames()) {
+      SwingUtilities.updateComponentTreeUI(j);
     }
   }
 
